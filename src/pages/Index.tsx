@@ -7,13 +7,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import Icon from '@/components/ui/icon';
 
 const movies = [
-  { id: 1, title: 'Зверополис 2', time: '10:30', duration: '109 мин', rating: '6+', genre: 'Анимация' },
-  { id: 2, title: 'Чебурашка 2', time: '13:00', duration: '95 мин', rating: '0+', genre: 'Семейный' },
-  { id: 3, title: 'Левша', time: '14:55', duration: '132 мин', rating: '12+', genre: 'Драма' },
-  { id: 4, title: 'Буратино', time: '17:05', duration: '118 мин', rating: '6+', genre: 'Фэнтези' },
-  { id: 5, title: 'Чебурашка 2', time: '19:00', duration: '95 мин', rating: '0+', genre: 'Семейный' },
-  { id: 6, title: 'Простоквашино', time: '21:00', duration: '88 мин', rating: '0+', genre: 'Анимация' },
-  { id: 7, title: 'Возвращение в Сайлент Хилл', time: '23:00', duration: '127 мин', rating: '18+', genre: 'Ужасы' },
+  { id: 1, title: 'Зверополис 2', time: '10:30', duration: '109 мин', rating: '6+', genre: 'Анимация', featured: false },
+  { id: 2, title: 'Чебурашка 2', time: '13:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
+  { id: 3, title: 'Левша', time: '14:55', duration: '132 мин', rating: '12+', genre: 'Драма', featured: false },
+  { id: 4, title: 'Буратино', time: '17:05', duration: '118 мин', rating: '6+', genre: 'Фэнтези', featured: false },
+  { id: 5, title: 'Чебурашка 2', time: '19:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
+  { id: 6, title: 'Простоквашино', time: '21:00', duration: '88 мин', rating: '0+', genre: 'Анимация', featured: false },
+  { id: 7, title: 'Возвращение в Сайлент Хилл', time: '23:00', duration: '127 мин', rating: '18+', genre: 'Ужасы', featured: false },
 ];
 
 const cinemaBar = [
@@ -102,6 +102,63 @@ const Index = () => {
       <main className="container mx-auto px-4 py-8">
         {activeSection === 'schedule' && (
           <div className="animate-fade-in">
+            <div className="relative overflow-hidden rounded-2xl mb-12 animate-scale-in">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-green-500/90 backdrop-blur-sm"></div>
+              <div className="relative grid md:grid-cols-2 gap-6 p-8">
+                <div className="flex flex-col justify-center space-y-4">
+                  <Badge className="bg-white/20 text-white border-white/40 w-fit backdrop-blur-sm">
+                    <Icon name="Star" size={16} className="mr-1" />
+                    Премьера
+                  </Badge>
+                  <h2 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    Чебурашка 2
+                  </h2>
+                  <p className="text-xl text-white/90 drop-shadow-md">
+                    Возвращение любимого героя в новом приключении!
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
+                      Семейный
+                    </Badge>
+                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
+                      0+
+                    </Badge>
+                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
+                      95 мин
+                    </Badge>
+                  </div>
+                  <div className="flex gap-3 pt-4">
+                    <Button 
+                      size="lg" 
+                      className="bg-white text-orange-600 hover:bg-white/90 shadow-xl font-bold"
+                      onClick={() => {
+                        setSelectedMovie(movies.find(m => m.id === 2) || null);
+                        setShowBooking(true);
+                      }}
+                    >
+                      <Icon name="Ticket" size={20} className="mr-2" />
+                      Забронировать
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="bg-white/20 text-white border-white/40 backdrop-blur-sm hover:bg-white/30"
+                    >
+                      <Icon name="Play" size={20} className="mr-2" />
+                      Трейлер
+                    </Button>
+                  </div>
+                </div>
+                <div className="relative hidden md:block">
+                  <img 
+                    src="https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg"
+                    alt="Чебурашка 2"
+                    className="rounded-xl shadow-2xl hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="mb-8">
               <h2 className="text-4xl font-bold mb-2">Расписание сеансов</h2>
               <p className="text-muted-foreground capitalize">{currentDate}</p>
@@ -114,27 +171,48 @@ const Index = () => {
               {movies.map((movie, index) => (
                 <Card
                   key={movie.id}
-                  className="group p-6 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 cursor-pointer hover:scale-105 border-2 hover:border-primary/50"
+                  className={`group p-6 transition-all duration-300 cursor-pointer hover:scale-105 border-2 ${
+                    movie.featured 
+                      ? 'bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-orange-300 dark:border-orange-700 hover:shadow-2xl hover:shadow-orange-500/30' 
+                      : 'hover:shadow-xl hover:shadow-primary/20 hover:border-primary/50'
+                  }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => {
                     setSelectedMovie(movie);
                     setShowBooking(true);
                   }}
                 >
+                  {movie.featured && (
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1 animate-pulse">
+                      <Icon name="Star" size={12} />
+                      ХИТ
+                    </div>
+                  )}
+                  
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                      <h3 className={`text-xl font-bold mb-2 transition-colors ${
+                        movie.featured 
+                          ? 'text-orange-600 dark:text-orange-400 group-hover:text-orange-700' 
+                          : 'group-hover:text-primary'
+                      }`}>
                         {movie.title}
                       </h3>
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="outline">{movie.genre}</Badge>
+                        <Badge variant={movie.featured ? "default" : "outline"} className={movie.featured ? 'bg-orange-500' : ''}>
+                          {movie.genre}
+                        </Badge>
                         <Badge variant="secondary">{movie.rating}</Badge>
                       </div>
                     </div>
                     <Icon
                       name="ChevronRight"
                       size={24}
-                      className="text-muted-foreground group-hover:text-primary transition-colors"
+                      className={`transition-colors ${
+                        movie.featured 
+                          ? 'text-orange-500 group-hover:text-orange-600' 
+                          : 'text-muted-foreground group-hover:text-primary'
+                      }`}
                     />
                   </div>
 
@@ -145,10 +223,12 @@ const Index = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Icon name="Calendar" size={16} className="text-primary" />
-                        <span className="text-2xl font-bold text-primary">{movie.time}</span>
+                        <Icon name="Calendar" size={16} className={movie.featured ? 'text-orange-500' : 'text-primary'} />
+                        <span className={`text-2xl font-bold ${movie.featured ? 'text-orange-600 dark:text-orange-400' : 'text-primary'}`}>
+                          {movie.time}
+                        </span>
                       </div>
-                      <Button size="sm" variant="secondary">
+                      <Button size="sm" variant={movie.featured ? "default" : "secondary"} className={movie.featured ? 'bg-orange-500 hover:bg-orange-600' : ''}>
                         Забронировать
                       </Button>
                     </div>
