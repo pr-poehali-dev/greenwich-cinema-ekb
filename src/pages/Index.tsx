@@ -8,17 +8,16 @@ import Icon from '@/components/ui/icon';
 
 const movies = [
   { id: 1, title: 'Зверополис 2', time: '10:30', duration: '109 мин', rating: '6+', genre: 'Анимация', featured: false },
-  { id: 2, title: 'Чебурашка 2', time: '13:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
-  { id: 3, title: 'Папа может', time: '14:55', duration: '102 мин', rating: '12+', genre: 'Комедия', featured: false },
-  { id: 4, title: 'Буратино', time: '17:05', duration: '118 мин', rating: '6+', genre: 'Фэнтези', featured: false },
-  { id: 5, title: 'Чебурашка 2', time: '19:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
-  { id: 6, title: 'Простоквашино', time: '21:00', duration: '88 мин', rating: '0+', genre: 'Анимация', featured: false },
-  { id: 7, title: 'Возвращение в Сайлент Хилл', time: '23:00', duration: '127 мин', rating: '18+', genre: 'Ужасы', featured: false },
+  { id: 2, title: 'Чебурашка 2', time: '13:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: false, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
+  { id: 3, title: 'Папа может', time: '14:55', duration: '102 мин', rating: '12+', genre: 'Комедия', featured: true },
+  { id: 4, title: 'Папины дочки: Мама вернулась', time: '16:30', duration: '98 мин', rating: '6+', genre: 'Комедия', featured: false },
+  { id: 5, title: 'Буратино', time: '18:30', duration: '118 мин', rating: '6+', genre: 'Фэнтези', featured: false },
+  { id: 6, title: 'Чебурашка 2', time: '20:30', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: false, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
+  { id: 7, title: 'Простоквашино', time: '22:15', duration: '88 мин', rating: '0+', genre: 'Анимация', featured: false },
+  { id: 8, title: 'Возвращение в Сайлент Хилл', time: '23:45', duration: '127 мин', rating: '18+', genre: 'Ужасы', featured: false },
 ];
 
-const comingSoon = [
-  { id: 1, title: 'Папины дочки: Мама вернулась', duration: '98 мин', rating: '6+', genre: 'Комедия', premiere: '8 февраля', description: 'Долгожданное возвращение любимых героев!' },
-];
+
 
 const cinemaBar = [
   { id: 1, name: 'Попкорн маленький', price: 150, category: 'Попкорн' },
@@ -35,12 +34,24 @@ const Index = () => {
   const [showBooking, setShowBooking] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
   const [activeSection, setActiveSection] = useState('schedule');
+  const [selectedDate, setSelectedDate] = useState(0);
 
-  const currentDate = new Date().toLocaleDateString('ru-RU', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  });
+  const generateDates = () => {
+    const dates = [];
+    for (let i = 0; i < 10; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() + i);
+      dates.push({
+        day: date.getDate(),
+        weekday: date.toLocaleDateString('ru-RU', { weekday: 'short' }),
+        fullDate: date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })
+      });
+    }
+    return dates;
+  };
+
+  const availableDates = generateDates();
+  const currentDate = availableDates[selectedDate].fullDate;
 
   const handleSeatClick = (seatNumber: number) => {
     setSelectedSeats((prev) =>
@@ -116,46 +127,64 @@ const Index = () => {
                       Скоро в кино
                     </Badge>
                     <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      Папины дочки: Мама вернулась
+                      Папа может
                     </h2>
                     <p className="text-white/90 mb-3">
-                      Долгожданное возвращение любимых героев!
+                      Трогательная комедия о семейных ценностях
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
                         Комедия
                       </Badge>
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                        6+
+                        12+
                       </Badge>
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                        98 мин
+                        102 мин
                       </Badge>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2 text-white">
                         <Icon name="Calendar" size={20} />
-                        <span className="text-xl font-bold">С 8 февраля</span>
+                        <span className="text-xl font-bold">С 5 февраля</span>
                       </div>
                     </div>
                   </div>
                   <Button 
                     size="lg" 
                     className="bg-white text-purple-600 hover:bg-white/90 shadow-xl font-bold"
+                    onClick={() => {
+                      setSelectedMovie(movies.find(m => m.id === 3) || null);
+                      setShowBooking(true);
+                    }}
                   >
-                    <Icon name="Bell" size={20} className="mr-2" />
-                    Уведомить о премьере
+                    <Icon name="Ticket" size={20} className="mr-2" />
+                    Забронировать
                   </Button>
                 </div>
               </div>
             </div>
 
             <div className="mb-8">
-              <h2 className="text-4xl font-bold mb-2">Расписание сеансов</h2>
-              <p className="text-muted-foreground capitalize">{currentDate}</p>
-              <Badge variant="secondary" className="mt-2">
-                Действует до 19 февраля
-              </Badge>
+              <h2 className="text-4xl font-bold mb-4">Расписание сеансов</h2>
+              <div className="flex gap-2 overflow-x-auto pb-4">
+                {availableDates.map((date, index) => (
+                  <Button
+                    key={index}
+                    variant={selectedDate === index ? "default" : "outline"}
+                    className={`min-w-[80px] flex-col h-auto py-3 ${
+                      selectedDate === index 
+                        ? 'bg-primary text-primary-foreground' 
+                        : ''
+                    }`}
+                    onClick={() => setSelectedDate(index)}
+                  >
+                    <span className="text-xs opacity-70">{date.weekday}</span>
+                    <span className="text-2xl font-bold">{date.day}</span>
+                  </Button>
+                ))}
+              </div>
+              <p className="text-muted-foreground capitalize mt-2">{currentDate}</p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
