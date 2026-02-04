@@ -216,7 +216,7 @@ const Index = () => {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {movies.map((movie, index) => (
+              {movies.filter(movie => !movie.isComingSoon).map((movie, index) => (
                 <Card
                   key={movie.id}
                   className={`group p-6 transition-all duration-300 cursor-pointer hover:scale-105 border-2 ${
