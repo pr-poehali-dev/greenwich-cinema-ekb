@@ -17,7 +17,7 @@ const movies = [
 ];
 
 const comingSoon = [
-  { id: 1, title: 'Папа может', duration: '102 мин', rating: '12+', genre: 'Комедия', premiere: '5 февраля', description: 'Трогательная комедия о семейных ценностях' },
+  { id: 1, title: 'Папины дочки: Мама вернулась', duration: '98 мин', rating: '6+', genre: 'Комедия', premiere: '8 февраля', description: 'Долгожданное возвращение любимых героев!' },
 ];
 
 const cinemaBar = [
@@ -116,26 +116,26 @@ const Index = () => {
                       Скоро в кино
                     </Badge>
                     <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      Папа может
+                      Папины дочки: Мама вернулась
                     </h2>
                     <p className="text-white/90 mb-3">
-                      Трогательная комедия о семейных ценностях
+                      Долгожданное возвращение любимых героев!
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
                         Комедия
                       </Badge>
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                        12+
+                        6+
                       </Badge>
                       <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                        102 мин
+                        98 мин
                       </Badge>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2 text-white">
                         <Icon name="Calendar" size={20} />
-                        <span className="text-xl font-bold">С 5 февраля</span>
+                        <span className="text-xl font-bold">С 8 февраля</span>
                       </div>
                     </div>
                   </div>
@@ -146,63 +146,6 @@ const Index = () => {
                     <Icon name="Bell" size={20} className="mr-2" />
                     Уведомить о премьере
                   </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-2xl mb-12 animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/90 via-amber-500/90 to-green-500/90 backdrop-blur-sm"></div>
-              <div className="relative grid md:grid-cols-2 gap-6 p-8">
-                <div className="flex flex-col justify-center space-y-4">
-                  <Badge className="bg-white/20 text-white border-white/40 w-fit backdrop-blur-sm">
-                    <Icon name="Star" size={16} className="mr-1" />
-                    Премьера
-                  </Badge>
-                  <h2 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                    Чебурашка 2
-                  </h2>
-                  <p className="text-xl text-white/90 drop-shadow-md">
-                    Возвращение любимого героя в новом приключении!
-                  </p>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                      Семейный
-                    </Badge>
-                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                      0+
-                    </Badge>
-                    <Badge className="bg-white/30 text-white backdrop-blur-sm border-white/40">
-                      95 мин
-                    </Badge>
-                  </div>
-                  <div className="flex gap-3 pt-4">
-                    <Button 
-                      size="lg" 
-                      className="bg-white text-orange-600 hover:bg-white/90 shadow-xl font-bold"
-                      onClick={() => {
-                        setSelectedMovie(movies.find(m => m.id === 2) || null);
-                        setShowBooking(true);
-                      }}
-                    >
-                      <Icon name="Ticket" size={20} className="mr-2" />
-                      Забронировать
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      variant="outline" 
-                      className="bg-white/20 text-white border-white/40 backdrop-blur-sm hover:bg-white/30"
-                    >
-                      <Icon name="Play" size={20} className="mr-2" />
-                      Трейлер
-                    </Button>
-                  </div>
-                </div>
-                <div className="relative hidden md:block">
-                  <img 
-                    src="https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg"
-                    alt="Чебурашка 2"
-                    className="rounded-xl shadow-2xl hover:scale-105 transition-transform duration-500"
-                  />
                 </div>
               </div>
             </div>
