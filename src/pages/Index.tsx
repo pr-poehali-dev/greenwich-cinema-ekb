@@ -14,6 +14,7 @@ const movies = [
   { id: 5, title: 'Чебурашка 2', time: '19:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
   { id: 6, title: 'Простоквашино', time: '21:00', duration: '88 мин', rating: '0+', genre: 'Анимация', featured: false },
   { id: 7, title: 'Возвращение в Сайлент Хилл', time: '23:00', duration: '127 мин', rating: '18+', genre: 'Ужасы', featured: false },
+  { id: 8, title: 'Папа может', time: '16:30', duration: '102 мин', rating: '12+', genre: 'Комедия', featured: false, premiere: '25 февраля', isComingSoon: true },
 ];
 
 const cinemaBar = [
@@ -189,6 +190,13 @@ const Index = () => {
                     </div>
                   )}
                   
+                  {movie.isComingSoon && (
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                      <Icon name="Sparkles" size={12} />
+                      СКОРО
+                    </div>
+                  )}
+                  
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <h3 className={`text-xl font-bold mb-2 transition-colors ${
@@ -203,6 +211,11 @@ const Index = () => {
                           {movie.genre}
                         </Badge>
                         <Badge variant="secondary">{movie.rating}</Badge>
+                        {movie.premiere && (
+                          <Badge variant="outline" className="bg-blue-500/10 border-blue-500 text-blue-600 dark:text-blue-400">
+                            {movie.premiere}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                     <Icon
@@ -225,11 +238,11 @@ const Index = () => {
                       <div className="flex items-center gap-2">
                         <Icon name="Calendar" size={16} className={movie.featured ? 'text-orange-500' : 'text-primary'} />
                         <span className={`text-2xl font-bold ${movie.featured ? 'text-orange-600 dark:text-orange-400' : 'text-primary'}`}>
-                          {movie.time}
+                          {movie.isComingSoon ? movie.premiere : movie.time}
                         </span>
                       </div>
                       <Button size="sm" variant={movie.featured ? "default" : "secondary"} className={movie.featured ? 'bg-orange-500 hover:bg-orange-600' : ''}>
-                        Забронировать
+                        {movie.isComingSoon ? 'Уведомить' : 'Забронировать'}
                       </Button>
                     </div>
                   </div>
