@@ -9,7 +9,7 @@ import Icon from '@/components/ui/icon';
 const movies = [
   { id: 1, title: 'Зверополис 2', time: '10:30', duration: '109 мин', rating: '6+', genre: 'Анимация', featured: false },
   { id: 2, title: 'Чебурашка 2', time: '13:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
-  { id: 3, title: 'Левша', time: '14:55', duration: '132 мин', rating: '12+', genre: 'Драма', featured: false },
+  { id: 3, title: 'Папа может', time: '14:55', duration: '102 мин', rating: '12+', genre: 'Комедия', featured: false },
   { id: 4, title: 'Буратино', time: '17:05', duration: '118 мин', rating: '6+', genre: 'Фэнтези', featured: false },
   { id: 5, title: 'Чебурашка 2', time: '19:00', duration: '95 мин', rating: '0+', genre: 'Семейный', featured: true, poster: 'https://cdn.poehali.dev/projects/fd304f8b-6a54-455c-849a-73c437824ea1/bucket/a9fef8e1-e3a0-4d2e-b594-f18580532e0f.jpg' },
   { id: 6, title: 'Простоквашино', time: '21:00', duration: '88 мин', rating: '0+', genre: 'Анимация', featured: false },
@@ -17,7 +17,7 @@ const movies = [
 ];
 
 const comingSoon = [
-  { id: 1, title: 'Папа может', duration: '102 мин', rating: '12+', genre: 'Комедия', premiere: '25 февраля', description: 'Трогательная комедия о семейных ценностях' },
+  { id: 1, title: 'Папа может', duration: '102 мин', rating: '12+', genre: 'Комедия', premiere: '5 февраля', description: 'Трогательная комедия о семейных ценностях' },
 ];
 
 const cinemaBar = [
@@ -135,7 +135,7 @@ const Index = () => {
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2 text-white">
                         <Icon name="Calendar" size={20} />
-                        <span className="text-xl font-bold">С 25 февраля</span>
+                        <span className="text-xl font-bold">С 5 февраля</span>
                       </div>
                     </div>
                   </div>
